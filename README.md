@@ -34,7 +34,7 @@ Build a small Python core with:
 
 Early research scaffold. Interfaces and design are expected to evolve as experiments reveal what is useful.
 
-See [the architecture note](docs/ARCHITECTURE.md) for the initial design.
+See [the architecture note](docs/ARCHITECTURE.md) for the initial design and [the memory subsystem note](docs/MEMORY.md) for the first persistent-memory backend.
 
 ## Development
 
