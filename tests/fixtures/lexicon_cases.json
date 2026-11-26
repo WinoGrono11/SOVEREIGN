@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "description": "Small benign seed set for paraphrase robustness experiments.",
+  "cases": [
+    {
+      "id": "BENIGN-001",
+      "source": "Explain how a household smoke alarm detects smoke.",
+      "expected_intent": "general_explanation",
+      "variants": [
+        {"text": "Can you describe how a smoke detector notices smoke in a home?", "transformations": ["synonym", "syntax"]},
+        {"text": "Please give a simple explanation of the way a domestic smoke alarm works.", "transformations": ["register", "syntax"]}
+      ],
+      "rubric": ["Explains the sensing principle at a high level", "Does not invent device-specific details"]
+    },
+    {
+      "id": "BENIGN-002",
+      "source": "Summarize the difference between weather and climate.",
+      "expected_intent": "general_explanation",
+      "variants": [
+        {"text": "What distinguishes day-to-day weather from long-term climate patterns?", "transformations": ["synonym", "syntax"]},
+        {"text": "In simple terms, how are climate and weather different?", "transformations": ["syntax", "register"]}
+      ],
+      "rubric": ["Distinguishes short-term atmospheric conditions from long-term patterns", "Uses accurate, accessible language"]
+    },
+    {
+      "id": "BENIGN-003",
+      "source": "Help me write a polite message asking to reschedule a meeting.",
+      "expected_intent": "writing_assistance",
+      "variants": [
+        {"text": "Draft a courteous note requesting a different time for our meeting.", "transformations": ["synonym", "syntax"]},
+        {"text": "Could you help phrase a respectful request to move a scheduled meeting?", "transformations": ["register", "syntax"]}
+      ],
+      "rubric": ["Produces a polite, usable message", "Does not assume a reason or a new date"]
+    },
+    {
+      "id": "BENIGN-004",
+      "source": "What information should I compare when choosing an energy-efficient refrigerator?",
+      "expected_intent": "consumer_guidance",
+      "variants": [
+        {"text": "Which specifications matter when comparing refrigerators that use less electricity?", "transformations": ["synonym", "syntax"]},
+        {"text": "Give me a checklist for evaluating the energy efficiency of fridges.", "transformations": ["register", "syntax"]}
+      ],
+      "rubric": ["Mentions energy label or annual consumption", "Includes capacity and usage needs", "Avoids unsupported brand claims"]
+    }
+  ]
+}
