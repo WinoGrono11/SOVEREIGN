@@ -71,7 +71,7 @@ def validate_lexicon_fixture(payload: Any) -> list[str]:
                     )
                 else:
                     for transformation_index, transformation in enumerate(transformations):
-                        if transformation not in ALLOWED_TRANSFORMATIONS:
+                        if not isinstance(transformation, str) or transformation not in ALLOWED_TRANSFORMATIONS:
                             errors.append(
                                 f"{variant_prefix}.transformations[{transformation_index}]: "
                                 f"unsupported label {transformation!r}"
@@ -99,5 +99,5 @@ def load_lexicon_fixture(path: str | Path) -> dict[str, Any]:
 
     errors = validate_lexicon_fixture(payload)
     if errors:
-        raise ValueError("Invalid lexicon fixture:\\n- " + "\\n- ".join(errors))
+        raise ValueError("Invalid lexicon fixture:\n- " + "\n- ".join(errors))
     return payload
