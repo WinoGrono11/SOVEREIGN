@@ -23,14 +23,33 @@ class MemoryStore:
 
     def __init__(self, database: str | Path) -> None:
         self.database = str(database)
-        if self.database != ":memory:":
+        self._uri = False
+        self._keeper: sqlite3.Connection | None = None
+        if self.database == ":memory:":
+            # Separate sqlite3.connect(":memory:") calls create separate databases.
+            # A shared-cache URI plus a keeper connection preserves one in-memory
+            # database across the short-lived connections used by this store.
+            self.database = (
+                "file:sovereign-memory-"
+                + uuid.uuid4().hex
+                + "?mode=memory&cache=shared"
+            )
+            self._uri = True
+            self._keeper = sqlite3.connect(self.database, uri=True)
+        else:
             Path(self.database).expanduser().parent.mkdir(parents=True, exist_ok=True)
         self._initialize()
 
     def _connect(self) -> sqlite3.Connection:
-        connection = sqlite3.connect(self.database)
+        connection = sqlite3.connect(self.database, uri=self._uri)
         connection.row_factory = sqlite3.Row
         return connection
+
+    def close(self) -> None:
+        """Release the keeper connection used by an in-memory database."""
+        if self._keeper is not None:
+            self._keeper.close()
+            self._keeper = None
 
     def _initialize(self) -> None:
         with self._connect() as connection:
