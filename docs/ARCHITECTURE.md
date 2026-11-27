@@ -14,7 +14,7 @@ User / Client
      v
 SOVEREIGN Runtime
      |---- Configuration
-     |---- Memory interface (future milestone)
+     |---- Explicit SQLite MemoryStore (implemented separately; caller-controlled)
      |---- Tool registry (future milestone)
      |---- Audit events (future milestone)
      |
@@ -31,7 +31,7 @@ Model Provider interface
 The runtime depends on a small interface, not a vendor-specific SDK. Provider adapters translate between that interface and provider APIs.
 
 ### 2. Explicit memory
-Memory is a separate subsystem, not an assumed property of the model. Future memory backends should support inspection, export, retention rules and deletion.
+Memory is a separate subsystem, not an assumed property of the model. The first local SQLite backend supports explicit add, inspect, substring search, update, deletion and JSON export. The runtime does not write memories automatically. Future work includes retention rules, encryption and a documented import/restore path.
 
 ### 3. Permissioned tools
 Tools should declare their capabilities and side effects. Read-only operations should be distinguishable from actions that write, send, purchase, publish or modify external state.
