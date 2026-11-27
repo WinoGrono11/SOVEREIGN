@@ -38,3 +38,15 @@ def test_reject_empty_content(tmp_path):
     store = MemoryStore(tmp_path / "memory.sqlite3")
     with pytest.raises(ValueError):
         store.add("   ")
+
+
+def test_in_memory_store_persists_across_operations():
+    store = MemoryStore(":memory:")
+    created = store.add("Ephemeral memory remains available to this instance.")
+
+    assert store.get(created["id"])["content"] == (
+        "Ephemeral memory remains available to this instance."
+    )
+    assert store.search("ephemeral")[0]["id"] == created["id"]
+
+    store.close()
