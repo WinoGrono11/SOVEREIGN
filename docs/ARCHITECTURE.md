@@ -57,3 +57,11 @@ Changing the provider changes the model implementation. Conversation history and
 - What is the smallest useful common denominator across hosted and local models?
 - How can users migrate their data without implying that model internals migrate with it?
 - Which actions should require confirmation, and how should revocation work?
+
+
+## Current implementation snapshot
+
+- The provider-neutral runtime delegates one explicit generation request to a supplied provider.
+- The SQLite memory store is independent of the runtime and writes only when a caller invokes its API.
+- The Lexicon Robustness Lab has a benign seed fixture and a deterministic structural validator. Semantic equivalence and content-safety review remain human responsibilities.
+- Tool registration, permission enforcement and audit-event integration are still future milestones; their absence should not be inferred as implemented from the architecture diagram.
