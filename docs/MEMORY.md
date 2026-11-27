@@ -36,3 +36,12 @@ Search is case-insensitive substring matching, not semantic retrieval. There is 
 ## Design decision
 
 Memory is an explicit subsystem outside the model provider. Replacing the model does not require replacing the memory store. Conversely, this store does not recreate a model's weights, hidden state, or personal identity.
+
+
+## In-memory mode
+
+`MemoryStore(":memory:")` uses a shared in-process SQLite database so separate
+store operations see the same records for the lifetime of the instance. Call
+`close()` when the in-memory store is no longer needed to release its keeper
+connection. This mode is ephemeral and is not a substitute for a persistent
+database file or an export.
