@@ -53,3 +53,18 @@ If testing reveals a reproducible weakness in a third-party system, document the
 - Add a deterministic validator for fixture structure.
 - Add a runner adapter only after provider configuration and test isolation are documented.
 - Keep raw prompts, model outputs, and annotations explicitly opt-in; do not silently store user conversations.
+
+
+## Fixture validator
+
+The structural validator is available as
+`sovereign.lexicon.validate_lexicon_fixture(payload)`; it returns a list of
+path-specific errors. `load_lexicon_fixture(path)` loads UTF-8 JSON and raises
+`ValueError` when parsing or structural validation fails.
+
+The validator checks the schema version, case identifiers, required text,
+variant lists, transformation labels and rubric entries. It does **not** prove
+that variants preserve meaning or that arbitrary fixture text is safe. Those
+remain human-review responsibilities. The seed fixture contains benign,
+non-operational examples only. No provider calls, prompt transformations or
+security-evasion behavior are part of this module.
