@@ -49,10 +49,10 @@ If testing reveals a reproducible weakness in a third-party system, document the
 
 ## Initial milestone
 
-- Establish a small benign paraphrase set.
-- Add a deterministic validator for fixture structure.
-- Add a runner adapter only after provider configuration and test isolation are documented.
-- Keep raw prompts, model outputs, and annotations explicitly opt-in; do not silently store user conversations.
+- [x] Establish a small benign paraphrase set.
+- [x] Add a deterministic validator for fixture structure.
+- [ ] Add a runner adapter only after provider configuration and test isolation are documented.
+- [x] Keep raw prompts, model outputs, and annotations explicitly opt-in; do not silently store user conversations.
 
 
 ## Fixture validator
